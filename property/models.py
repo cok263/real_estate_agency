@@ -49,3 +49,13 @@ class Complaint(models.Model):
         null=True
     )
     text = models.TextField("Текст объявления")
+
+
+class Owner(models.Model):
+    name = models.CharField("ФИО владельца", max_length=200)
+    phonenumber = models.CharField("Номер владельца", max_length=20)
+    pure_phone = PhoneNumberField("Нормализованный номер владельца", blank=True)
+    flat = models.ManyToManyField("Flat", related_name="owners", blank=True)
+    
+    def __str__(self):
+        return f"{self.name}"
